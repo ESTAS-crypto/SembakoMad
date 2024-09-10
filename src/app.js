@@ -111,7 +111,7 @@ const formatMessage = (obj) => {
     .map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)})`)
     .join("%0A")}
 TOTAL: ${rupiah(obj.total)}
-Terima Kasih telah berbelanja di sembako madura`;
+Terima Kasih`;
 };
 
 // Konversi ke rupiah
@@ -131,7 +131,7 @@ document.getElementById("sendWhatsApp").addEventListener("click", function () {
   var pesan = document.getElementById("pesan").value;
 
   var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}%0ANo HP: ${nohp}%0AAlamat: ${alamat}%0APesan: ${pesan}
-  Terima Kasih telah memberikan tanggapan di sembako madura`;
+  Terima Kasih`;
 
   window.open(whatsappUrl, "_blank");
 });
