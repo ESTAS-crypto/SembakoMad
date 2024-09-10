@@ -134,7 +134,7 @@ document.getElementById("sendWhatsApp").addEventListener("click", function () {
   var alamat = document.getElementById("alamat").value;
   var pesan = document.getElementById("pesan").value;
 
-  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}No HP: ${nohp}Alamat: ${alamat}Pesan: ${pesan}
+  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}No HP: ${nohp}%0AAlamat: ${alamat}Pesan: ${pesan}
   Terima Kasih`;
 
   window.open(whatsappUrl, "_blank");
