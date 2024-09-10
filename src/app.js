@@ -128,18 +128,16 @@ const rupiah = (number) => {
 };
 
 // Tambahkan event listener untuk tombol Kirim Pesan di form kontak
+// Tambahkan event listener untuk tombol Kirim Pesan di form kontak
 document.getElementById("sendWhatsApp").addEventListener("click", function () {
-  var nama = document.getElementById("nama").value;
-  var nohp = document.getElementById("nohp").value;
-  var tujuan = document.getElementById("tujuan").value;
-  var pesan = document.getElementById("pesan").value;
+  var nama = encodeURIComponent(document.getElementById("nama").value.trim());
+  var nohp = encodeURIComponent(document.getElementById("nohp").value.trim());
+  var tujuan = encodeURIComponent(
+    document.getElementById("tujuan").value.trim()
+  );
+  var pesan = encodeURIComponent(document.getElementById("pesan").value.trim());
 
-  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=
-  Nama: ${nama}
-  No HP: ${nohp}
-  Alamat: ${tujuan}
-  Pesan: ${pesan}
-  Terima Kasih`;
+  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama%3A%20${nama}%0ANo%20HP%3A%20${nohp}%0Aalamat%3A%20${tujuan}%0APesan%3A%20${pesan}%0ATerima Kasih`;
 
   window.open(whatsappUrl, "_blank");
 });
