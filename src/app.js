@@ -105,11 +105,15 @@ checkoutButton.addEventListener("click", function(e) {
 
 // Format pesan WA
 const formatMessage = (obj) => {
-        return `Data Customer%0ANama: ${obj.name}%0AEmail: ${obj.email}%0AAlamat: ${
-    obj.alamat
-  }%0ANo Hp: ${obj.phone}%0AData Pesanan:%0A${JSON.parse(obj.items)
-    .map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)})`)
-    .join("%0A")}
+        return `Data Customer 
+Nama: ${obj.name}
+Email: ${obj.email}
+Alamat: ${obj.alamat}
+No Hp: ${obj.phone}
+Data Pesanan:
+${JSON.parse(obj.items)
+  .map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)})`)
+  .join("")}
 TOTAL: ${rupiah(obj.total)}
 Terima Kasih`;
 };
@@ -130,7 +134,7 @@ document.getElementById("sendWhatsApp").addEventListener("click", function () {
   var alamat = document.getElementById("alamat").value;
   var pesan = document.getElementById("pesan").value;
 
-  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}%0ANo HP: ${nohp}%0AAlamat: ${alamat}%0APesan: ${pesan}
+  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}No HP: ${nohp}Alamat: ${alamat}Pesan: ${pesan}
   Terima Kasih`;
 
   window.open(whatsappUrl, "_blank");
