@@ -679,32 +679,8 @@ footer .credit a {
 
 /* tablet */
 
-@media only screen and (max-width: 768px) {
-    html {
-        font-size: 62%;
-    }
-    #hamburger-menu {
-        display: inline-block;
-    }
-    .navbar .navbar-nav {
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        background-color: #fff;
-        width: 30rem;
-        height: 100vh;
-        transition: 0.5s;
-    }
-    .navbar .navbar-nav.active {
-        right: 0;
-    }
-    .navbar .navbar-nav a {
-        color: var(--bg);
-        display: block;
-        margin: 1.5rem;
-        padding: 0.5rem;
-        font-size: 2rem;
-    }
+/* Existing styles */
+@media (max-width: 768px) {
     .navbar .navbar-nav a::after {
         transform-origin: 0 0;
     }
@@ -721,7 +697,7 @@ footer .credit a {
     .about .row .about-img img {
         height: 24rem;
         object-fit: cover;
-        object-position: cover;
+        object-position: center;
     }
     .about .row .content {
         padding: 0;
@@ -750,6 +726,73 @@ footer .credit a {
     }
 }
 
+/* mobile */
+@media (max-width: 450px) {
+    html {
+        font-size: 50%; /* Adjusted for better readability on small screens */
+    }
+    
+    /* Add more specific styles for very small screens */
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        background-color: #fff;
+        width: 30rem;
+        height: 100vh;
+        transition: 0.3s;
+    }
+    
+    .navbar .navbar-nav.active {
+        right: 0;
+    }
+    
+    .navbar .navbar-nav a {
+        color: var(--bg);
+        display: block;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+    
+    .about .row .about-img img {
+        height: auto;
+        max-width: 100%;
+    }
+    
+    .menu .row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .menu .row .menu-card {
+        width: 100%;
+    }
+    
+    .contact .row form {
+        padding: 1rem;
+    }
+}
+
+/* iPhone-specific fixes */
+@media screen and (max-width: 428px) and (max-device-width: 926px) {
+    body {
+        -webkit-text-size-adjust: 100%; /* Prevents automatic text scaling on iOS */
+    }
+    
+    input, textarea {
+        font-size: 16px; /* Prevents zoom on input focus in iOS */
+    }
+    
+    .navbar, .about, .menu, .contact {
+        padding: 1rem 5%; /* Adjusted padding for better layout on narrow screens */
+    }
+    
+    .modal-container {
+        padding: 1rem;
+        width: 90%;
+    }
+}
 
 /* mobile */
 
