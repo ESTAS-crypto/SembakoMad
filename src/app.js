@@ -1,62 +1,72 @@
 document.addEventListener("alpine:init", () => {
-    Alpine.data("menu", () => ({
-        items: [
-            { id: 1, name: "Midnight", img: "1.jpg", price: 45000 },
-            { id: 2, name: "Cocoa", img: "2.jpg", price: 19000 },
-            { id: 3, name: "Americano", img: "3.jpg", price: 20000 },
-            { id: 4, name: "Cap", img: "4.jpg", price: 18000 },
-            { id: 5, name: "Caramel", img: "5.jpg", price: 25000 },
-            { id: 6, name: "Mocha", img: "6.jpg", price: 40000 },
-        ],
-    }));
+  Alpine.data("menu", () => ({
+    items: [
+      { id: 1, name: "Midnight", img: "1.jpg", price: 45000 },
+      { id: 2, name: "Cocoa", img: "2.jpg", price: 19000 },
+      { id: 3, name: "Americano", img: "3.jpg", price: 20000 },
+      { id: 4, name: "Cap", img: "4.jpg", price: 18000 },
+      { id: 5, name: "Caramel", img: "5.jpg", price: 25000 },
+      { id: 6, name: "Mocha", img: "6.jpg", price: 40000 },
+    ],
+  }));
+  Alpine.data("menu2", () => ({
+    items: [
+      { id: 1, name: "Midnight", img: "1.jpg", price: 45000 },
+      { id: 2, name: "Cocoa", img: "2.jpg", price: 19000 },
+      { id: 3, name: "Americano", img: "3.jpg", price: 20000 },
+      { id: 4, name: "Cap", img: "4.jpg", price: 18000 },
+      { id: 5, name: "Caramel", img: "5.jpg", price: 25000 },
+      { id: 6, name: "Mocha", img: "6.jpg", price: 40000 },
+    ],
+  }));
 
-    Alpine.store("cart", {
-        items: [],
-        total: 0,
-        quantity: 0,
-        add(newItem) {
-            const cartItem = this.items.find((item) => item.id === newItem.id);
+  Alpine.store("cart", {
+    items: [],
+    total: 0,
+    quantity: 0,
+    add(newItem) {
+      const cartItem = this.items.find((item) => item.id === newItem.id);
 
-            if (!cartItem) {
-                this.items.push({...newItem, quantity: 1, total: newItem.price });
-                this.quantity++;
-                this.total += newItem.price;
-            } else {
-                this.items = this.items.map((item) => {
-                    if (item.id !== newItem.id) {
-                        return item;
-                    } else {
-                        item.quantity++;
-                        item.total = item.price * item.quantity;
-                        this.quantity++;
-                        this.total += item.price;
-                        return item;
-                    }
-                });
-            }
-        },
-        remove(id) {
-            const cartItem = this.items.find((item) => item.id === id);
+      if (!cartItem) {
+        this.items.push({ ...newItem, quantity: 1, total: newItem.price });
+        this.quantity++;
+        this.total += newItem.price;
+      } else {
+        this.items = this.items.map((item) => {
+          if (item.id !== newItem.id) {
+            return item;
+          } else {
+            item.quantity++;
+            item.total = item.price * item.quantity;
+            this.quantity++;
+            this.total += item.price;
+            return item;
+          }
+        });
+      }
+    },
+    remove(id) {
+      const cartItem = this.items.find((item) => item.id === id);
 
-            if (cartItem.quantity > 1) {
-                this.items = this.items.map((item) => {
-                    if (item.id !== id) {
-                        return item;
-                    } else {
-                        item.quantity--;
-                        item.total = item.price * item.quantity;
-                        this.quantity--;
-                        this.total -= item.price;
-                        return item;
-                    }
-                });
-            } else if (cartItem.quantity === 1) {
-                this.items = this.items.filter((item) => item.id !== id);
-                this.quantity--;
-                this.total -= cartItem.price;
-            }
-        },
-    });
+      if (cartItem.quantity > 1) {
+        this.items = this.items.map((item) => {
+          if (item.id !== id) {
+            return item;
+          } else {
+            item.quantity--;
+            item.total = item.price * item.quantity;
+            this.quantity--;
+            this.total -= item.price;
+            return item;
+          }
+        });
+      } else if (cartItem.quantity === 1) {
+        this.items = this.items.filter((item) => item.id !== id);
+        this.quantity--;
+        this.total -= cartItem.price;
+      }
+    },
+  });
 });
 
 // Form validation
@@ -65,47 +75,47 @@ checkoutButton.disabled = true;
 
 const form = document.querySelector("#checkoutForm");
 
-form.addEventListener("keyup", function() {
-    let allFieldsFilled = true;
-    for (let i = 0; i < form.elements.length; i++) {
-        if (
-            form.elements[i].type !== "hidden" &&
-            form.elements[i].value.length === 0
-        ) {
-            allFieldsFilled = false;
-            break;
-        }
+form.addEventListener("keyup", function () {
+  let allFieldsFilled = true;
+  for (let i = 0; i < form.elements.length; i++) {
+    if (
+      form.elements[i].type !== "hidden" &&
+      form.elements[i].value.length === 0
+    ) {
+      allFieldsFilled = false;
+      break;
     }
+  }
 
-    if (allFieldsFilled) {
-        checkoutButton.disabled = false;
-        checkoutButton.classList.remove("disabled");
-    } else {
-        checkoutButton.disabled = true;
-        checkoutButton.classList.add("disabled");
-    }
+  if (allFieldsFilled) {
+    checkoutButton.disabled = false;
+    checkoutButton.classList.remove("disabled");
+  } else {
+    checkoutButton.disabled = true;
+    checkoutButton.classList.add("disabled");
+  }
 });
 
 // Kirim data ketika tombol checkout di klik
-checkoutButton.addEventListener("click", function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const data = new URLSearchParams(formData);
-    const objData = Object.fromEntries(data);
+checkoutButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const data = new URLSearchParams(formData);
+  const objData = Object.fromEntries(data);
 
-    const message = formatMessage(objData);
+  const message = formatMessage(objData);
 
-    // Buka WhatsApp dengan pesan
-    window.open(
-        "https://api.whatsapp.com/send?phone=62895385890629&text=" +
-        encodeURIComponent(message),
-        "_blank"
-    );
+  // Buka WhatsApp dengan pesan
+  window.open(
+    "https://api.whatsapp.com/send?phone=62895385890629&text=" +
+      encodeURIComponent(message),
+    "_blank"
+  );
 });
 
 // Format pesan WA
 const formatMessage = (obj) => {
-        return `Data Customer 
+  return `Data Customer 
 Nama: ${obj.name}
 Email: ${obj.email}
 Alamat: ${obj.alamat}
@@ -128,16 +138,14 @@ const rupiah = (number) => {
 };
 
 // Tambahkan event listener untuk tombol Kirim Pesan di form kontak
-// Tambahkan event listener untuk tombol Kirim Pesan di form kontak
 document.getElementById("sendWhatsApp").addEventListener("click", function () {
-  var nama = encodeURIComponent(document.getElementById("nama").value.trim());
-  var nohp = encodeURIComponent(document.getElementById("nohp").value.trim());
-  var tujuan = encodeURIComponent(
-    document.getElementById("tujuan").value.trim()
-  );
-  var pesan = encodeURIComponent(document.getElementById("pesan").value.trim());
+  var nama = document.getElementById("nama").value;
+  var nohp = document.getElementById("nohp").value;
+  var alamat = document.getElementById("alamat").value;
+  var pesan = document.getElementById("pesan").value;
 
-  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama%3A%20${nama}%0ANo%20HP%3A%20${nohp}%0Aalamat%3A%20${tujuan}%0APesan%3A%20${pesan}%0ATerima Kasih`;
+  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}No HP: ${nohp}Alamat: ${alamat}Pesan: ${pesan}
+  Terima Kasih`;
 
   window.open(whatsappUrl, "_blank");
 });
