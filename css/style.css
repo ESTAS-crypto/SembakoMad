@@ -136,13 +136,15 @@ html {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #000000;
+    background-color: rgba(2, 2, 2, 0.3);
+    backdrop-filter: blur(10px);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgb(0, 0, 0);
     z-index: 1;
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-left: -2rem;
 }
 
 .dropdown-content.show {
@@ -162,10 +164,9 @@ html {
 .dropdown-content a:hover,
 .dropdown-content a:active,
 .dropdown-content a:focus {
-    background-color: #333;
-    /* Ubah warna latar belakang saat hover/active/focus */
+    background-color: transparent;
     color: #fff;
-    /* Pastikan teks tetap putih */
+    margin-left: 3rem;
 }
 
 .dropdown:hover .dropbtn {
@@ -481,6 +482,8 @@ background: linear-gradient(
 .menu .row .menu-card img {
     border-radius: 50%;
     width: 80%;
+    transform: scale(10deg);
+    transition: 0.5s;
 }
 
 .menu .row .menu-card .menu-card-title {
@@ -693,6 +696,7 @@ footer .credit a {
     margin-top: 1rem;
     padding: 1rem 1.6rem;
     font-size: 1.2rem;
+    border-radius: 5rem;
 }
 
 .modal .product-stars {
@@ -801,9 +805,25 @@ footer .credit a {
     .modal-content {
         flex-wrap: wrap;
     }
+    .modal-content p {
+        font-size: 1.7rem;
+        padding-bottom: 0.5rem;
+    }
+    h3 {
+        font-size: 2.2rem;
+        margin-left: auto;
+    }
+    .modal-content a {
+        border-radius: 2rem;
+    }
+    .modal-content img {
+        margin-left: 7rem;
+        width: 22rem;
+        height: 22rem;
+    }
     .modal-container {
-        width: 48rem;
-        height: 39rem;
+        width: 40rem;
+        height: 46rem;
         border-radius: 1rem;
     }
     .dropdown-content {
@@ -812,11 +832,12 @@ footer .credit a {
         box-shadow: none;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 10s ease, opacity 10s ease, transform 10s ease;
+        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
     }
     .dropdown-content.show {
         max-height: 500px;
         /* Sesuaikan nilai ini berdasarkan konten Anda */
+        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
     }
     .navbar .navbar-nav a {
         transition: margin 0.3s ease;
