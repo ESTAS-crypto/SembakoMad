@@ -812,7 +812,7 @@ footer .credit a {
         box-shadow: none;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+        transition: max-height 10s ease, opacity 10s ease, transform 10s ease;
     }
     .dropdown-content.show {
         max-height: 500px;
