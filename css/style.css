@@ -860,4 +860,13 @@ footer .credit a {
     html {
         font-size: 55%;
     }
+        .dropdown-content {
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+        margin-left: 0rem;
+        }
 }
