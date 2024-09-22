@@ -482,8 +482,6 @@ background: linear-gradient(
 .menu .row .menu-card img {
     border-radius: 50%;
     width: 80%;
-    transform: scale(10deg);
-    transition: 0.5s;
 }
 
 .menu .row .menu-card .menu-card-title {
@@ -634,6 +632,8 @@ footer .credit a {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-container {
@@ -646,19 +646,20 @@ footer .credit a {
     width: 80%;
     border-radius: 1rem;
     height: 22rem;
+    animation: modalFade 0.7s ease-in-out;
 }
 
 
 /* modal animasi */
 
-@keyframes animateModal {
+@keyframes modalFade {
     from {
-        top: -300px;
         opacity: 0;
+        transform: translateY(222px);
     }
     to {
-        top: 0;
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
