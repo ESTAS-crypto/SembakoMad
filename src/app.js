@@ -1,194 +1,189 @@
-document.addEventListener("alpine:init", () => {
-            const showItemDetails = (item) => {
-                    const modal = document.getElementById("items-detail-modal");
-                    const modalContent = modal.querySelector(".modal-content");
+// Toggle class active menu
+const navbarNav = document.querySelector(".navbar-nav");
+const hamburgerMenu = document.querySelector("#hamburger-menu");
+const dropdowns = document.querySelectorAll(".dropdown");
 
-                    modalContent.innerHTML = `
-          <img src="img/menu/${item.img}" alt="${item.name}" />
-          <div class="product-content">
-              <h3>${item.name}</h3>
-              <p>${item.description}</p>
-              <div class="product-stars">
-                  ${Array(5).fill().map((_, i) => `
-                      <svg width="24" height="24" fill="${i < 5 ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <use href="img/feather-sprite.svg#star" />
-                      </svg>
-                  `).join("")}
-              </div>
-              <div class="menu-card-price">${rupiah(item.price)}</div>
-              <a href="#" @click.prevent="$store.cart.add(${JSON.stringify(item)})">
-                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <use href="img/feather-sprite.svg#shopping-cart" />
-                  </svg>
-                  <span>Add to cart</span>
-              </a>
-          </div>
-      `;
+hamburgerMenu.onclick = (e) => {
+    navbarNav.classList.toggle("active");
+    e.preventDefault();
+};
 
-      modal.style.display = "flex";
-  };
+// Toggle class active search form
+const searchForm = document.querySelector(".search-form");
+const searchBox = document.querySelector("#search-box");
+const searchButton = document.querySelector("#search-button");
 
-  Alpine.data("menu", () => ({
-      items: [
-          { id: 1, name: "Midnight", img: "1.jpg", price: 45000, description: "Kopi hitam kuat dengan sentuhan rempah untuk pengalaman malam yang tak terlupakan." },
-          { id: 2, name: "Cocoa", img: "2.jpg", price: 19000, description: "Minuman cokelat lembut yang menghangatkan hati dan pikiran." },
-          { id: 3, name: "Americano", img: "3.jpg", price: 20000, description: "Espresso klasik yang diencerkan dengan air panas, memberikan cita rasa kopi yang kuat namun ringan." },
-          { id: 4, name: "Cap", img: "4.jpg", price: 18000, description: "Perpaduan sempurna antara espresso, susu steamed, dan foam susu yang lembut." },
-          { id: 5, name: "Caramel", img: "5.jpg", price: 25000, description: "Latte manis dengan sentuhan karamel yang memanjakan lidah." },
-          { id: 6, name: "Mocha", img: "6.jpg", price: 40000, description: "Kombinasi harmonis antara espresso, cokelat, dan susu untuk pencinta kopi dan cokelat." },
-      ],
-      showItemDetails
-  }));
+searchButton.onclick = (e) => {
+    searchForm.classList.toggle("active");
+    searchBox.focus();
+    e.preventDefault();
+};
 
-  Alpine.data("menu2", () => ({
-      items: [
-          { id: 7, name: "Green Tea", img: "7.jpg", price: 15000, description: "Teh hijau segar dengan antioksidan tinggi untuk menyegarkan hari Anda." },
-          { id: 8, name: "Lemon Tea", img: "8.jpg", price: 17000, description: "Teh hitam dengan sentuhan lemon yang menyegarkan dan menyehatkan." },
-          { id: 9, name: "Milk Tea", img: "9.jpg", price: 20000, description: "Teh susu creamy yang lembut dan menenangkan." },
-          { id: 10, name: "Boba Tea", img: "10.jpg", price: 25000, description: "Teh susu dengan tambahan boba yang kenyal dan menyenangkan." },
-          { id: 11, name: "Matcha Latte", img: "11.jpg", price: 28000, description: "Minuman berbasis matcha yang creamy dengan cita rasa unik." },
-          { id: 12, name: "Thai Tea", img: "12.jpg", price: 22000, description: "Teh Thailand yang khas dengan rasa manis dan creamy." },
-      ],
-      showItemDetails
-  }));
+// Toggle class active shopping cart
+const shoppingCart = document.querySelector(".shopping-cart");
+const shoppingCartButton = document.querySelector("#shopping-cart-button");
 
-  Alpine.data("menu3", () => ({
-      items: [
-          { id: 13, name: "Bayam", img: "13.jpg", price: 10000, description: "Sayuran hijau segar kaya akan zat besi dan nutrisi penting." },
-          { id: 14, name: "Wortel", img: "14.jpg", price: 12000, description: "Wortel segar kaya vitamin A untuk kesehatan mata dan kulit." },
-          { id: 15, name: "Brokoli", img: "15.jpg", price: 15000, description: "Sayuran hijau kaya serat dan antioksidan untuk kesehatan optimal." },
-          { id: 16, name: "Kale", img: "16.jpg", price: 18000, description: "Superfood kaya nutrisi dengan manfaat kesehatan yang luar biasa." },
-          { id: 17, name: "Kangkung", img: "17.jpg", price: 8000, description: "Sayuran hijau lokal yang lezat dan kaya akan zat besi." },
-          { id: 18, name: "Sawi", img: "18.jpg", price: 9000, description: "Sayuran hijau segar dengan rasa ringan dan kaya vitamin." },
-      ],
-      showItemDetails
-  }));
-    Alpine.store("cart", {
-        items: [],
-        total: 0,
-        quantity: 0,
-        add(newItem) {
-            const cartItem = this.items.find((item) => item.id === newItem.id);
+shoppingCartButton.onclick = (e) => {
+    shoppingCart.classList.toggle("active");
+    e.preventDefault();
+};
 
-            if (!cartItem) {
-                this.items.push({...newItem, quantity: 1, total: newItem.price });
-                this.quantity++;
-                this.total += newItem.price;
-            } else {
-                this.items = this.items.map((item) => {
-                    if (item.id !== newItem.id) {
-                        return item;
+// Modal box
+const itemsDetailModal = document.querySelector("#items-detail-modal");
+const itemsDetailButtons = document.querySelectorAll(".items-detail-button");
+const closeModalButton = document.querySelector(".modal .close-icon");
+
+itemsDetailButtons.forEach((btn) => {
+    btn.onclick = (e) => {
+        itemsDetailModal.style.display = "flex";
+        e.preventDefault();
+    };
+});
+
+// Close modal on close icon click
+closeModalButton.onclick = (e) => {
+    itemsDetailModal.style.display = "none";
+    e.preventDefault();
+};
+
+// Close modal on outside click
+window.onclick = (e) => {
+    if (e.target === itemsDetailModal) {
+        itemsDetailModal.style.display = "none";
+    }
+};
+
+
+document.addEventListener("DOMContentLoaded", function(e) {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach((dropdown) => {
+        const dropdownContent = dropdown.querySelector(".dropdown-content");
+        const dropdownToggle = dropdown.querySelector(".dropbtn");
+
+        dropdownToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Close all other dropdowns
+            dropdowns.forEach((otherDropdown) => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown
+                        .querySelector(".dropdown-content")
+                        .classList.remove("show");
+                }
+            });
+
+            // Toggle current dropdown
+            dropdownContent.classList.toggle("show");
+
+            // Adjust spacing for mobile view
+            if (window.innerWidth <= 768) {
+                const nextSibling = dropdown.nextElementSibling;
+                if (nextSibling) {
+                    if (dropdownContent.classList.contains("show")) {
+                        // Hitung tinggi konten dropdown
+                        const dropdownHeight = dropdownContent.scrollHeight;
+                        // Tambahkan margin-top yang sesuai (misalnya, setengah dari tinggi dropdown)
+                        // nextSibling.style.marginTop = dropdownHeight / 2 + "px";
                     } else {
-                        item.quantity++;
-                        item.total = item.price * item.quantity;
-                        this.quantity++;
-                        this.total += item.price;
-                        return item;
+                        // nextSibling.style.marginTop = "0";
                     }
-                });
+                }
             }
-        },
-        remove(id) {
-            const cartItem = this.items.find((item) => item.id === id);
+        });
+    });
 
-            if (cartItem.quantity > 1) {
-                this.items = this.items.map((item) => {
-                    if (item.id !== id) {
-                        return item;
-                    } else {
-                        item.quantity--;
-                        item.total = item.price * item.quantity;
-                        this.quantity--;
-                        this.total -= item.price;
-                        return item;
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function(e) {
+        dropdowns.forEach((dropdown) => {
+            const dropdownContent = dropdown.querySelector(".dropdown-content");
+            if (!dropdown.contains(e.target)) {
+                dropdownContent.classList.remove("show");
+                // Reset spacing for mobile view
+                if (window.innerWidth <= 768) {
+                    // const nextSibling = dropdown.nextElementSibling;
+                    if (nextSibling) {
+                        nextSibling.style.marginTop = "0";
                     }
-                });
-            } else if (cartItem.quantity === 1) {
-                this.items = this.items.filter((item) => item.id !== id);
-                this.quantity--;
-                this.total -= cartItem.price;
+                }
             }
-        },
+        });
+    });
+
+    // Tambahkan animasi untuk desktop
+    if (window.innerWidth > 768) {
+        dropdowns.forEach((dropdown) => {
+            const dropdownContent = dropdown.querySelector(".dropdown-content");
+            dropdown.addEventListener("mouseenter", () => {
+                dropdownContent.style.display = "block";
+                setTimeout(() => {
+                    dropdownContent.style.opacity = "1";
+                    dropdownContent.style.transform = "translateY(0)";
+                }, 10);
+            });
+            dropdown.addEventListener("mouseleave", () => {
+                dropdownContent.style.opacity = "0";
+                dropdownContent.style.transform = "translateY(-10px)";
+                setTimeout(() => {
+                    dropdownContent.style.display = "none";
+                }, 300);
+            });
+        });
+    }
+});
+// Close elements when clicking outside
+document.addEventListener("click", (e) => {
+    // Close navbar if clicking outside
+    if (!hamburgerMenu.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove("active");
+    }
+
+    // Close search form if clicking outside
+    if (!searchButton.contains(e.target) && !searchForm.contains(e.target)) {
+        searchForm.classList.remove("active");
+    }
+
+    // Close shopping cart if clicking outside
+    if (!shoppingCartButton.contains(e.target) &&
+        !shoppingCart.contains(e.target)
+    ) {
+        shoppingCart.classList.remove("active");
+    }
+
+    // Close dropdown if clicking outside
+    dropdowns.forEach((dropdown) => {
+        const dropdownContent = dropdown.querySelector(".dropdown-content");
+        if (!dropdown.contains(e.target)) {
+            dropdownContent.classList.remove("show");
+        }
     });
 });
 
-// Form validation
-const checkoutButton = document.querySelector(".checkout-button");
-checkoutButton.disabled = true;
+// Close elements when touching outside (for mobile)
+document.addEventListener("touchstart", (e) => {
+    // Close navbar if touching outside
+    if (!hamburgerMenu.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove("active");
+    }
 
-const form = document.querySelector("#checkoutForm");
+    // Close search form if touching outside
+    if (!searchButton.contains(e.target) && !searchForm.contains(e.target)) {
+        searchForm.classList.remove("active");
+    }
 
-form.addEventListener("keyup", function() {
-    let allFieldsFilled = true;
-    for (let i = 0; i < form.elements.length; i++) {
-        if (
-            form.elements[i].type !== "hidden" &&
-            form.elements[i].value.length === 0
-        ) {
-            allFieldsFilled = false;
-            break;
+    // Close shopping cart if touching outside
+    if (!shoppingCartButton.contains(e.target) &&
+        !shoppingCart.contains(e.target)
+    ) {
+        shoppingCart.classList.remove("active");
+    }
+
+    // Close dropdown if touching outside
+    dropdowns.forEach((dropdown) => {
+        const dropdownContent = dropdown.querySelector(".dropdown-content");
+        if (!dropdown.contains(e.target)) {
+            dropdownContent.classList.remove("show");
         }
-    }
-
-    if (allFieldsFilled) {
-        checkoutButton.disabled = false;
-        checkoutButton.classList.remove("disabled");
-    } else {
-        checkoutButton.disabled = true;
-        checkoutButton.classList.add("disabled");
-    }
-});
-
-// Kirim data ketika tombol checkout di klik
-checkoutButton.addEventListener("click", function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const data = new URLSearchParams(formData);
-    const objData = Object.fromEntries(data);
-
-    const message = formatMessage(objData);
-
-    // Buka WhatsApp dengan pesan
-    window.open(
-        "https://api.whatsapp.com/send?phone=62895385890629&text=" +
-        encodeURIComponent(message),
-        "_blank"
-    );
-});
-
-// Format pesan WA
-const formatMessage = (obj) => {
-        return `Data Customer 
-Nama: ${obj.name}
-Email: ${obj.email}
-Alamat: ${obj.alamat}
-No Hp: ${obj.phone}
-Data Pesanan:
-${JSON.parse(obj.items)
-  .map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)})`)
-  .join("")}
-TOTAL: ${rupiah(obj.total)}
-Terima Kasih`;
-};
-
-// Konversi ke rupiah
-const rupiah = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-  }).format(number);
-};
-
-// Tambahkan event listener untuk tombol Kirim Pesan di form kontak
-document.getElementById("sendWhatsApp").addEventListener("click", function () {
-  var nama = document.getElementById("nama").value;
-  var nohp = document.getElementById("nohp").value;
-  var alamat = document.getElementById("alamat").value;
-  var pesan = document.getElementById("pesan").value;
-
-  var whatsappUrl = `https://api.whatsapp.com/send?phone=62895385890629&text=Nama: ${nama}No HP: ${nohp}Alamat: ${alamat}Pesan: ${pesan}
-  Terima Kasih`;
-
-  window.open(whatsappUrl, "_blank");
+    });
 });
