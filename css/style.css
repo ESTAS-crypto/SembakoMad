@@ -677,7 +677,7 @@ footer .credit a {
 .modal-content img {
     height: 15rem;
     margin-right: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: 1rem;
 }
 
@@ -691,12 +691,12 @@ footer .credit a {
 .modal-content a {
     display: flex;
     gap: 1rem;
-    width: 14rem;
+    width: auto;
     background-color: var(--primary);
     color: #fff;
     margin-top: 1rem;
-    padding: 1rem 1.6rem;
-    font-size: 1.2rem;
+    padding: 1rem 15rem;
+    font-size: 1.3rem;
     border-radius: 5rem;
 }
 
@@ -710,7 +710,7 @@ footer .credit a {
 }
 
 .modal .menu-card-price {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -812,41 +812,45 @@ footer .credit a {
     }
     h3 {
         font-size: 2.2rem;
-        margin-left: auto;
+        margin-right: 10rem;
     }
     .modal-content a {
         border-radius: 2rem;
     }
     .modal-content img {
-        margin-left: 7rem;
+        margin-left: 9rem;
         width: 22rem;
         height: 22rem;
     }
     .modal-container {
-        width: 40rem;
-        height: 48rem;
+        width: 44rem;
         border-radius: 1rem;
+        height: 46rem;
     }
-    .dropdown-content {
-        position: static;
-        background-color: transparent;
-        box-shadow: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
-        margin-left: 0rem;
-    }
-    .dropdown-content.show {
-        max-height: 500px;
-        /* Sesuaikan nilai ini berdasarkan konten Anda */
-        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
-    }
-    .navbar .navbar-nav a {
-        transition: margin 0.3s ease;
-    }
-    .dropdown {
-        width: 30rem;
-    }
+}
+
+.dropdown-content {
+    position: static;
+    background-color: transparent;
+    box-shadow: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+    margin-left: 0rem;
+}
+
+.dropdown-content.show {
+    max-height: 500px;
+    /* Sesuaikan nilai ini berdasarkan konten Anda */
+    transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+}
+
+.navbar .navbar-nav a {
+    transition: margin 0.3s ease;
+}
+
+.dropdown {
+    width: 30rem;
 }
 
 .element style {
@@ -860,13 +864,4 @@ footer .credit a {
     html {
         font-size: 55%;
     }
-        .dropdown-content {
-        position: static;
-        background-color: transparent;
-        box-shadow: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
-        margin-left: 0rem;
-        }
 }
