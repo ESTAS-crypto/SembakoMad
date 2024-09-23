@@ -1,5 +1,5 @@
 :root {
-    --primary: #00fc65;
+    --primary: #41B3A2;
     --bg: #010101;
 }
 
@@ -166,7 +166,6 @@ html {
 .dropdown-content a:focus {
     background-color: transparent;
     color: #fff;
-    margin-left: 3rem;
 }
 
 .dropdown:hover .dropbtn {
@@ -457,7 +456,7 @@ background: linear-gradient(
     margin: auto;
     font-weight: 100;
     line-height: 1.6;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .menu .row {
@@ -514,7 +513,7 @@ background: linear-gradient(
 
 .menu .product-stars {
     padding: 1rem;
-    color: var(--primary);
+    color: #fff220;
 }
 
 .menu .product-stars .stars-full {
@@ -522,7 +521,7 @@ background: linear-gradient(
 }
 
 .menu .menu-card-price {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -677,7 +676,7 @@ footer .credit a {
 .modal-content img {
     height: 15rem;
     margin-right: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     border-radius: 1rem;
 }
 
@@ -691,18 +690,18 @@ footer .credit a {
 .modal-content a {
     display: flex;
     gap: 1rem;
-    width: auto;
+    width: 14rem;
     background-color: var(--primary);
     color: #fff;
     margin-top: 1rem;
-    padding: 1rem 15rem;
-    font-size: 1.3rem;
+    padding: 1rem 1.6rem;
+    font-size: 1.2rem;
     border-radius: 5rem;
 }
 
 .modal .product-stars {
     padding: 0, 5rem;
-    color: var(--primary);
+    color: #fff220;
 }
 
 .modal .product-stars .stars-full {
@@ -710,7 +709,7 @@ footer .credit a {
 }
 
 .modal .menu-card-price {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
 }
 
@@ -812,45 +811,41 @@ footer .credit a {
     }
     h3 {
         font-size: 2.2rem;
-        margin-right: 10rem;
+        margin-left: auto;
     }
     .modal-content a {
         border-radius: 2rem;
     }
     .modal-content img {
-        margin-left: 9rem;
+        margin-left: 7rem;
         width: 22rem;
         height: 22rem;
     }
     .modal-container {
-        width: 44rem;
+        width: 40rem;
+        height: 47em;
         border-radius: 1rem;
-        height: 46rem;
     }
-}
-
-.dropdown-content {
-    position: static;
-    background-color: transparent;
-    box-shadow: none;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
-    margin-left: 0rem;
-}
-
-.dropdown-content.show {
-    max-height: 500px;
-    /* Sesuaikan nilai ini berdasarkan konten Anda */
-    transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
-}
-
-.navbar .navbar-nav a {
-    transition: margin 0.3s ease;
-}
-
-.dropdown {
-    width: 30rem;
+    .dropdown-content {
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+        margin-left: 0rem;
+    }
+    .dropdown-content.show {
+        max-height: 500px;
+        /* Sesuaikan nilai ini berdasarkan konten Anda */
+        transition: max-height 1s ease, opacity 1s ease, transform 1s ease;
+    }
+    .navbar .navbar-nav a {
+        transition: margin 0.3s ease;
+    }
+    .dropdown {
+        width: 30rem;
+    }
 }
 
 .element style {
